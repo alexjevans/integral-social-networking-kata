@@ -30,13 +30,14 @@ namespace Integral
             strBuilder.Clear();
             for(int i = 0; i < posts.Count; i++)
             {
-                if(i != posts.Count - 1)
+                var timelinePost = posts[i].Item1 + " (" + time.GetMinutesSinceStart(posts[i].Item2, now) + ")";
+                if (i != posts.Count - 1)
                 {
-                    strBuilder.AppendLine(posts[i].Item1);
+                    strBuilder.AppendLine(timelinePost);
                 }
                 else
                 {
-                    strBuilder.Append(posts[i].Item1);
+                    strBuilder.Append(timelinePost);
                 }
             }
             return strBuilder.ToString();
