@@ -8,7 +8,8 @@ namespace Integral.Time
     {
         public string GetMinutesSinceStart(DateTime start, DateTime now)
         {
-            return ((int) (now - start).TotalMinutes).ToString();
+            var timespan = now - start;
+            return timespan.TotalMinutes + " minute ago";
         }
     }
 }

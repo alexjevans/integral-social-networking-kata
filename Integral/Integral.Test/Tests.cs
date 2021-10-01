@@ -30,7 +30,7 @@ namespace Integral.Test
         [Fact]
         public void GetTimeSince()
         {
-            const string expectedMinutesSince = "1";
+            const string expectedMinutesSince = "1 minute ago";
             var now = DateTime.UtcNow;
             var start = now.Subtract(TimeSpan.FromMinutes(1));
 
