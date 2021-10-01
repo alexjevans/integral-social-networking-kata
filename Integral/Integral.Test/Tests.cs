@@ -28,11 +28,23 @@ namespace Integral.Test
         }
 
         [Fact]
-        public void GetTimeSince()
+        public void GetTimeSinceSingleMinute()
         {
             const string expectedMinutesSince = "1 minute ago";
             var now = DateTime.UtcNow;
             var start = now.Subtract(TimeSpan.FromMinutes(1));
+
+            var time = new TimeResolver();
+
+            Assert.Equal(expectedMinutesSince, time.GetMinutesSinceStart(start, now));
+        }
+
+        [Fact]
+        public void GetTimeSinceMultipleMinutes()
+        {
+            const string expectedMinutesSince = "2 minutes ago";
+            var now = DateTime.UtcNow;
+            var start = now.Subtract(TimeSpan.FromMinutes(2));
 
             var time = new TimeResolver();
 
