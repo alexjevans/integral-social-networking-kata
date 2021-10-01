@@ -15,3 +15,9 @@ In the Integral.Tests project are the unit tests I have written for this solutio
 ## Dependencies
 
 This project uses [xunit](https://xunit.net/) as the unit testing library and [autofac](https://autofac.org/) as the dependency injection library.
+
+## Notes
+
+After I created this repository and cloned it, I had to spend some time waiting for Visual Studio to update and add C# templates, so I didn't count that time for this exercise. I started timing myself from commit 9be5a6180b3befa215e411b81132539ca7e87731 (the 3rd one).
+
+Thank you for considering me for this role. I look forward to following up!
