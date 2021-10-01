@@ -13,5 +13,17 @@ namespace Integral.Test
             alice.Publish(postText);
             Assert.Equal(postText, alice.GetTimeline());
         }
+
+        [Fact]
+        public void Timeline()
+        {
+            const string bobPost1 = "Darn! We lost! (2 minute ago)";
+            const string bobPost2 = "Good game though. (1 minute ago)";
+            var bobTimeline = bobPost1 + '\n' + bobPost2;
+            User bob = new User();
+            bob.Publish(bobPost1);
+            bob.Publish(bobPost2);
+            Assert.Equal(bobTimeline, bob.GetTimeline());
+        }
     }
 }
