@@ -8,8 +8,6 @@ namespace Integral.Time
     {
         void SetStartTime(DateTime start);
 
-        void SetCurrentTime(DateTime now);
-
-        int GetMinutesSinceStart();
+        int GetMinutesSinceStart(DateTime now);
     }
 }

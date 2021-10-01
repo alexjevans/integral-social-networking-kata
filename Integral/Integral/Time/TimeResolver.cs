@@ -6,19 +6,16 @@ namespace Integral.Time
 {
     public class TimeResolver : ITimeResolver
     {
+        private DateTime start;
+
         public void SetStartTime(DateTime start)
         {
-
+            this.start = start;
         }
 
-        public int GetMinutesSinceStart()
+        public int GetMinutesSinceStart(DateTime now)
         {
             return 1;
-        }
-
-        public void SetCurrentTime(DateTime now)
-        {
-            
         }
     }
 }
