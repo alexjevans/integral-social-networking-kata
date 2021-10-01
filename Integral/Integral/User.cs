@@ -25,7 +25,7 @@ namespace Integral
             posts.Add(new Tuple<string, DateTime>(post, time));
         }
 
-        public string GetTimeline()
+        public string GetTimeline(DateTime now = default)
         {
             strBuilder.Clear();
             for(int i = 0; i < posts.Count; i++)

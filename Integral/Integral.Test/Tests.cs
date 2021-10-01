@@ -11,9 +11,12 @@ namespace Integral.Test
         {
             const string postText = "I love the weather today.";
             const string timelinePost = postText + " (0 minutes ago)";
+            var now = DateTime.UtcNow;
+
             User alice = new User();
-            alice.Publish(postText);
-            Assert.Equal(timelinePost, alice.GetTimeline());
+            alice.Publish(postText, now);
+
+            Assert.Equal(timelinePost, alice.GetTimeline(now));
         }
 
         [Fact]
