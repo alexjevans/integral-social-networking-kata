@@ -20,4 +20,6 @@ This project uses [xunit](https://xunit.net/) as the unit testing library and [a
 
 After I created this repository and cloned it, I had to spend some time waiting for Visual Studio to update and add C# templates, so I didn't count that time for this exercise. I started timing myself from commit 9be5a6180b3befa215e411b81132539ca7e87731 (the 3rd one).
 
+I created the repository with the alexjevans user. I decided to create that account just for this. After I pushed the code it, github shows my other user, finallyfunctional, as making the other commits. I probably had something cached. Both are me, but on the page it shows those two users as contributors. 
+
 Thank you for considering me for this role. I look forward to following up!
