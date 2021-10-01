@@ -10,9 +10,10 @@ namespace Integral.Test
         public void Publishing()
         {
             const string postText = "I love the weather today.";
+            const string timelinePost = postText + " (0 minutes ago)";
             User alice = new User();
             alice.Publish(postText);
-            Assert.Equal(postText, alice.GetTimeline());
+            Assert.Equal(timelinePost, alice.GetTimeline());
         }
 
         [Fact]
