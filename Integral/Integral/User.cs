@@ -21,6 +21,11 @@ namespace Integral
             posts.Add(new Tuple<string, DateTime>(post, time));
         }
 
+        public void Follow(User user)
+        {
+            //TODO
+        }
+
         public string GetTimeline(DateTime now = default)
         {
             strBuilder.Clear();
