@@ -6,8 +6,6 @@ namespace Integral.Time
 {
     public interface ITimeResolver
     {
-        void SetStartTime(DateTime start);
-
-        int GetMinutesSinceStart(DateTime now);
+        string GetMinutesSinceStart(DateTime start, DateTime now);
     }
 }

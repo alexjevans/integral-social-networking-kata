@@ -30,14 +30,13 @@ namespace Integral.Test
         [Fact]
         public void GetTimeSince()
         {
-            const int expectedMinutesSince = 1;
+            const string expectedMinutesSince = "1";
             var now = DateTime.UtcNow;
             var start = now.Subtract(TimeSpan.FromMinutes(1));
 
             var time = new TimeResolver();
-            time.SetStartTime(start);
 
-            Assert.Equal(expectedMinutesSince, time.GetMinutesSinceStart(now));
+            Assert.Equal(expectedMinutesSince, time.GetMinutesSinceStart(start, now));
         }
     }
 }
