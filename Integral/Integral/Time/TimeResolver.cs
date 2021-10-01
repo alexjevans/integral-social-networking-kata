@@ -13,12 +13,12 @@ namespace Integral.Time
 
         public int GetMinutesSinceStart()
         {
-            throw new NotImplementedException();
+            return 1;
         }
 
         public void SetCurrentTime(DateTime now)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
