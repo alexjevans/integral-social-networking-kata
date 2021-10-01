@@ -19,7 +19,7 @@ namespace Integral
 
         public string GetTimeline()
         {
-            return string.Join("\n", posts);
+            return string.Join(Environment.NewLine, posts);
         }
     }
 }
