@@ -15,7 +15,7 @@ namespace Integral.Time
 
         public int GetMinutesSinceStart(DateTime now)
         {
-            return 1;
+            return (int) (now - start).TotalMinutes;
         }
     }
 }

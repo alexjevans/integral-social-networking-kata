@@ -32,7 +32,7 @@ namespace Integral.Test
         {
             const int expectedMinutesSince = 1;
             var now = DateTime.UtcNow;
-            var start = now.Subtract(TimeSpan.FromSeconds(60));
+            var start = now.Subtract(TimeSpan.FromMinutes(1));
 
             var time = new TimeResolver();
             time.SetStartTime(start);
