@@ -22,13 +22,19 @@ namespace Integral.Test
         [Fact]
         public void Timeline()
         {
-            const string bobPost1 = "Darn! We lost! (2 minute ago)";
-            const string bobPost2 = "Good game though. (1 minute ago)";
-            var bobTimeline = bobPost1 + Environment.NewLine + bobPost2;
+            const string bobPost1 = "Darn! We lost!";
+            const string bobTimelinePost1 = bobPost1 + " (2 minutes ago)";
+            const string bobPost2 = "Good game though.";
+            const string bobTimelinePost2 = bobPost2 + " (1 minute ago)";
+            var bobTimeline = bobTimelinePost1 + Environment.NewLine + bobTimelinePost2;
+            var now = DateTime.UtcNow;
+            var post1Time = now.Subtract(TimeSpan.FromMinutes(2));
+            var post2Time = now.Subtract(TimeSpan.FromMinutes(1));
+
             User bob = new User();
-            bob.Publish(bobPost1);
-            bob.Publish(bobPost2);
-            Assert.Equal(bobTimeline, bob.GetTimeline());
+            bob.Publish(bobPost1, post1Time);
+            bob.Publish(bobPost2, post2Time);
+            Assert.Equal(bobTimeline, bob.GetTimeline(now));
         }
 
         [Fact]
