@@ -7,7 +7,7 @@ namespace Integral
 {
     public class User
     {
-        public List<Tuple<string, DateTime>> posts { get; private set; }
+        public List<Tuple<string, DateTime>> posts { get; private set; } //TODO - Move into another class for persistant storage. Create mock class for tests, uses dependency injection to inject mock here.
         private StringBuilder strBuilder;
 
         public User()
