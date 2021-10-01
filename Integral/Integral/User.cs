@@ -4,14 +4,16 @@ namespace Integral
 {
     public class User
     {
+        private string post;
+
         public void Publish(string post)
         {
-
+            this.post = post;
         }
 
         public string GetTimeline()
         {
-            return "I love the weather today.";
+            return post;
         }
     }
 }
