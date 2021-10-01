@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using Integral.Time;
 
 namespace Integral.Test
 {
@@ -24,6 +25,20 @@ namespace Integral.Test
             bob.Publish(bobPost1);
             bob.Publish(bobPost2);
             Assert.Equal(bobTimeline, bob.GetTimeline());
+        }
+
+        [Fact]
+        public void GetTimeSince()
+        {
+            const int expectedMinutesSince = 1;
+            var now = DateTime.UtcNow;
+            var start = now.Subtract(TimeSpan.FromSeconds(60));
+
+            var time = new TimeResolver();
+            time.SetStartTime(start);
+            time.SetCurrentTime(now);
+
+            Assert.Equal(expectedMinutesSince, time.GetMinutesSinceStart());
         }
     }
 }
