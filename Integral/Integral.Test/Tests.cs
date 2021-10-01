@@ -8,15 +8,23 @@ namespace Integral.Test
     {
         const string alicePostText = "I love the weather today.";
         const string aliceTimelinePost = alicePostText + " (0 minutes ago)";
+        const string bobPost1 = "Darn! We lost!";
+        const string bobTimelinePost1 = bobPost1 + " (2 minutes ago)";
+        const string bobPost2 = "Good game though.";
+        const string bobTimelinePost2 = bobPost2 + " (1 minute ago)";
 
         private DateTime now;
         private User alice, bob;
+        private DateTime bobPost1Time, bobPost2Time;
 
         public Tests()
         {
             now = DateTime.UtcNow;
             alice = new User();
             bob = new User();
+
+            bobPost1Time = now.Subtract(TimeSpan.FromMinutes(2));
+            bobPost2Time = now.Subtract(TimeSpan.FromMinutes(1));
         }
 
         [Fact]
@@ -30,18 +38,11 @@ namespace Integral.Test
         [Fact]
         public void Timeline()
         {
-            const string bobPost1 = "Darn! We lost!";
-            const string bobTimelinePost1 = bobPost1 + " (2 minutes ago)";
-            const string bobPost2 = "Good game though.";
-            const string bobTimelinePost2 = bobPost2 + " (1 minute ago)";
             var bobTimeline = bobTimelinePost1 + Environment.NewLine + bobTimelinePost2;
-            var now = DateTime.UtcNow;
-            var post1Time = now.Subtract(TimeSpan.FromMinutes(2));
-            var post2Time = now.Subtract(TimeSpan.FromMinutes(1));
 
-            User bob = new User();
-            bob.Publish(bobPost1, post1Time);
-            bob.Publish(bobPost2, post2Time);
+            bob.Publish(bobPost1, bobPost1Time);
+            bob.Publish(bobPost2, bobPost2Time);
+
             Assert.Equal(bobTimeline, bob.GetTimeline(now));
         }
 
