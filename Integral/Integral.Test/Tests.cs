@@ -6,17 +6,25 @@ namespace Integral.Test
 {
     public class Tests
     {
+        const string alicePostText = "I love the weather today.";
+        const string aliceTimelinePost = alicePostText + " (0 minutes ago)";
+
+        private DateTime now;
+        private User alice, bob;
+
+        public Tests()
+        {
+            now = DateTime.UtcNow;
+            alice = new User();
+            bob = new User();
+        }
+
         [Fact]
         public void Publishing()
         {
-            const string postText = "I love the weather today.";
-            const string timelinePost = postText + " (0 minutes ago)";
-            var now = DateTime.UtcNow;
+            alice.Publish(alicePostText, now);
 
-            User alice = new User();
-            alice.Publish(postText, now);
-
-            Assert.Equal(timelinePost, alice.GetTimeline(now));
+            Assert.Equal(aliceTimelinePost, alice.GetTimeline(now));
         }
 
         [Fact]
@@ -35,6 +43,12 @@ namespace Integral.Test
             bob.Publish(bobPost1, post1Time);
             bob.Publish(bobPost2, post2Time);
             Assert.Equal(bobTimeline, bob.GetTimeline(now));
+        }
+
+        [Fact]
+        public void Follow()
+        {
+
         }
 
         [Fact]

@@ -7,7 +7,7 @@ namespace Integral
 {
     public class User
     {
-        private List<Tuple<string, DateTime>> posts;
+        public List<Tuple<string, DateTime>> posts { get; private set; }
         private StringBuilder strBuilder;
 
         public User()
