@@ -9,7 +9,12 @@ namespace Integral.Time
         public string GetMinutesSinceStart(DateTime start, DateTime now)
         {
             var timespan = now - start;
-            return timespan.TotalMinutes + " minute ago";
+            var unit = "minute";
+            if(timespan.TotalMinutes != 1)
+            {
+                unit += "s";
+            }
+            return timespan.TotalMinutes + $" {unit} ago";
         }
     }
 }
