@@ -46,7 +46,7 @@ namespace Integral.Test
 
             var time = new TimeResolver();
 
-            Assert.Equal(expectedMinutesSince, time.GetMinutesSinceStart(start, now));
+            Assert.Equal(expectedMinutesSince, TimeResolver.GetMinutesSinceStart(start, now));
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Integral.Test
 
             var time = new TimeResolver();
 
-            Assert.Equal(expectedMinutesSince, time.GetMinutesSinceStart(start, now));
+            Assert.Equal(expectedMinutesSince, TimeResolver.GetMinutesSinceStart(start, now));
         }
     }
 }

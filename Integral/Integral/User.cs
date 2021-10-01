@@ -7,16 +7,12 @@ namespace Integral
 {
     public class User
     {
-        public ITimeResolver time { get; private set; }
-
         private List<Tuple<string, DateTime>> posts;
-
         private StringBuilder strBuilder;
 
         public User()
         {
             posts = new List<Tuple<string, DateTime>>();
-            time = new TimeResolver();
             strBuilder = new StringBuilder();
         }
 
@@ -30,7 +26,7 @@ namespace Integral
             strBuilder.Clear();
             for(int i = 0; i < posts.Count; i++)
             {
-                var timelinePost = posts[i].Item1 + " (" + time.GetMinutesSinceStart(posts[i].Item2, now) + ")";
+                var timelinePost = posts[i].Item1 + " (" + TimeResolver.GetMinutesSinceStart(posts[i].Item2, now) + ")";
                 if (i != posts.Count - 1)
                 {
                     strBuilder.AppendLine(timelinePost);

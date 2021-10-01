@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Integral.Time
 {
-    public class TimeResolver : ITimeResolver
+    public class TimeResolver
     {
-        public string GetMinutesSinceStart(DateTime start, DateTime now)
+        public static string GetMinutesSinceStart(DateTime start, DateTime now)
         {
             var timespan = now - start;
             var unit = "minute";
