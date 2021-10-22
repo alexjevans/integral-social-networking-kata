@@ -14,15 +14,13 @@ namespace Integral
             get;
             private set;
         } //TODO - Move into another class for persistant storage. Create mock class for tests, uses dependency injection to inject mock here.
-
-        private StringBuilder strBuilder;
+        
         private readonly List<User> followedUsers;
         public string Name { get; set; }
 
         public User()
         {
             posts = new List<Tuple<string, DateTime>>();
-            strBuilder = new StringBuilder();
             followedUsers = new List<User>();
             Name = string.Empty;
         }
@@ -49,8 +47,35 @@ namespace Integral
 
         private string GetPosts(DateTime now, bool includeFollowers, bool includeName)
         {
-            strBuilder.Clear();
+            var allPosts = GetWallPosts();
 
+            var filteredPosts = allPosts
+                .Where(post => post.Item3 == this || includeFollowers)
+                .Select(post => 
+                    FormatPost(now, includeName, post)
+                );
+
+            return string.Join(Environment.NewLine, filteredPosts);
+        }
+
+        private string FormatPost(DateTime now, bool includeName, Tuple<string, DateTime, User> post)
+        {
+            return FormatPost(now, includeName, post.Item3.Name, post.Item1, post.Item2);
+        }
+
+        private string FormatPost(DateTime now, bool includeName, string username, string message, DateTime time)
+        {
+            var timelinePost = message + GetPostTimestamp(time, now);
+            if (includeName)
+            {
+                timelinePost = username + " - " + timelinePost;
+            }
+
+            return timelinePost;
+        }
+
+        private List<Tuple<string, DateTime, User>> GetWallPosts()
+        {
             var allPosts = new List<Tuple<string, DateTime, User>>(posts.Select(post =>
                 new Tuple<string, DateTime, User>(post.Item1, post.Item2, this)));
             foreach (var followedUser in followedUsers)
@@ -59,34 +84,7 @@ namespace Integral
                     new Tuple<string, DateTime, User>(post.Item1, post.Item2, followedUser)));
             }
 
-            allPosts = allPosts.OrderByDescending(post => post.Item2).ToList();
-
-            for (int i = 0; i < allPosts.Count; i++)
-            {
-                var (message, time, user) = allPosts[i];
-                if (user != this && !includeFollowers)
-                {
-                    continue;
-                }
-
-                var username = user.Name;
-                var timelinePost = message + GetPostTimestamp(time, now);
-                if (includeName)
-                {
-                    timelinePost = username + " - " + timelinePost;
-                }
-                
-                if (i != allPosts.Count - 1)
-                {
-                    strBuilder.AppendLine(timelinePost);
-                }
-                else
-                {
-                    strBuilder.Append(timelinePost);
-                }
-            }
-
-            return strBuilder.ToString();
+            return allPosts.OrderByDescending(post => post.Item2).ToList();
         }
 
         private string GetPostTimestamp(DateTime postTime, DateTime now)

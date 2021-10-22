@@ -71,33 +71,15 @@ namespace Integral.Test
             Assert.Equal(charlieTimeline, charlie.GetWall(now));
         }
 
-        [Fact]
-        public void GetTimeSinceSingleMinute()
+
+        [Theory]
+        [InlineData("1 minute ago", 60)]
+        [InlineData("2 minutes ago", 120)]
+        [InlineData("15 seconds ago", 15)]
+        public void GetTimeSince(string expectedValue, int secondsOffset)
         {
-            const string expectedMinutesSince = "1 minute ago";
-            var now = DateTime.UtcNow;
-            var start = now.Subtract(TimeSpan.FromMinutes(1));
-
-            Assert.Equal(expectedMinutesSince, TimeResolver.GetFormatedTimeSinceStart(start, now));
-        }
-
-        [Fact]
-        public void GetTimeSinceMultipleMinutes()
-        {
-            const string expectedMinutesSince = "2 minutes ago";
-            var now = DateTime.UtcNow;
-            var start = now.Subtract(TimeSpan.FromMinutes(2));
-
-            Assert.Equal(expectedMinutesSince, TimeResolver.GetFormatedTimeSinceStart(start, now));
-        }
-
-        [Fact]
-        public void GetTimeSinceSeconds()
-        {
-            const string expectedSecondsSince = "15 seconds ago";
-            var now = DateTime.UtcNow;
-            var start = now.Subtract(TimeSpan.FromSeconds(15));
-            Assert.Equal(expectedSecondsSince, TimeResolver.GetFormatedTimeSinceStart(start, now));
+            var start = now.Subtract(TimeSpan.FromSeconds(secondsOffset));
+            Assert.Equal(expectedValue, TimeResolver.GetFormatedTimeSinceStart(start, now));
         }
     }
 }
