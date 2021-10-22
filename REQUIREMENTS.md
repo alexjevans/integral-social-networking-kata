@@ -35,6 +35,14 @@ Alice - I love the weather today (5 minutes ago)
 
 ## Additional Features
 
+### Feature: Timeline Output Setting
+
+Scenario: Alice has timestamps and user names disabled for her timeline.
+
+Scenarios: Bob has timestamps in addition to posts displayed on his timeline.
+
+Scenario: Charlie has timestamps, usernames, and posts displayed on his timeline.
+
 ### Feature: Unfollow
 
 Scenario: Alice unfollows Bob.
@@ -55,3 +63,5 @@ When Alice blocks Bob,
 Then Bob can no longer see Alice’s posts,
 And Alice can no longer see Bob’s posts,
 And Bob can not follow Alice again.
+
+* Refactor time resolver tests into one using a theory.

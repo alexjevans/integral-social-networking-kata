@@ -7,7 +7,7 @@ namespace Integral.Test
     public class Tests
     {
         const string alicePostText = "I love the weather today.";
-        const string aliceTimelinePost1 = alicePostText + " (0 minutes ago)";
+        const string aliceTimelinePost1 = alicePostText;
         const string aliceTimelinePost2 = alicePostText + " (5 minutes ago)";
         const string bobPost1 = "Darn! We lost!";
         const string bobTimelinePost1 = bobPost1 + " (2 minutes ago)";
@@ -53,7 +53,7 @@ namespace Integral.Test
         }
 
         [Fact]
-        public void Follow()
+        public void Following()
         {
             var charlieTimeline = 
                 "Charlie - " + charlieTimelinePost + Environment.NewLine +
@@ -68,8 +68,7 @@ namespace Integral.Test
             charlie.Follow(alice);
             charlie.Follow(bob);
 
-            //TODO
-            //Assert.Equal(charlieTimeline, charlie.GetTimeline(now));
+            Assert.Equal(charlieTimeline, charlie.GetWall(now));
         }
 
         [Fact]
@@ -79,9 +78,7 @@ namespace Integral.Test
             var now = DateTime.UtcNow;
             var start = now.Subtract(TimeSpan.FromMinutes(1));
 
-            var time = new TimeResolver();
-
-            Assert.Equal(expectedMinutesSince, TimeResolver.GetMinutesSinceStart(start, now));
+            Assert.Equal(expectedMinutesSince, TimeResolver.GetFormatedTimeSinceStart(start, now));
         }
 
         [Fact]
@@ -91,9 +88,16 @@ namespace Integral.Test
             var now = DateTime.UtcNow;
             var start = now.Subtract(TimeSpan.FromMinutes(2));
 
-            var time = new TimeResolver();
+            Assert.Equal(expectedMinutesSince, TimeResolver.GetFormatedTimeSinceStart(start, now));
+        }
 
-            Assert.Equal(expectedMinutesSince, TimeResolver.GetMinutesSinceStart(start, now));
+        [Fact]
+        public void GetTimeSinceSeconds()
+        {
+            const string expectedSecondsSince = "15 seconds ago";
+            var now = DateTime.UtcNow;
+            var start = now.Subtract(TimeSpan.FromSeconds(15));
+            Assert.Equal(expectedSecondsSince, TimeResolver.GetFormatedTimeSinceStart(start, now));
         }
     }
 }

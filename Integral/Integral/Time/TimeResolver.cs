@@ -6,15 +6,25 @@ namespace Integral.Time
 {
     public class TimeResolver
     {
-        public static string GetMinutesSinceStart(DateTime start, DateTime now)
+        public static string GetFormatedTimeSinceStart(DateTime start, DateTime now)
         {
             var timespan = now - start;
             var unit = "minute";
-            if(timespan.TotalMinutes != 1)
+            var totalUnits = timespan.TotalMinutes;
+            if(totalUnits == 0)
+            {
+                return string.Empty;
+            }
+            if (timespan.TotalSeconds < 60)
+            {
+                totalUnits = timespan.TotalSeconds;
+                unit = "second";
+            }
+            if(totalUnits > 1)
             {
                 unit += "s";
             }
-            return timespan.TotalMinutes + $" {unit} ago";
+            return totalUnits + $" {unit} ago";
         }
     }
 }

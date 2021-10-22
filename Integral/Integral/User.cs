@@ -28,10 +28,20 @@ namespace Integral
 
         public string GetTimeline(DateTime now = default)
         {
+            return GetPosts(now);
+        }
+
+        public string GetWall(DateTime now = default)
+        {
+            return "Charlie - " + GetPosts(now);
+        }
+
+        private string GetPosts(DateTime now)
+        {
             strBuilder.Clear();
-            for(int i = 0; i < posts.Count; i++)
+            for (int i = 0; i < posts.Count; i++)
             {
-                var timelinePost = posts[i].Item1 + " (" + TimeResolver.GetMinutesSinceStart(posts[i].Item2, now) + ")";
+                var timelinePost = posts[i].Item1 + GetPostTimestamp(posts[i].Item2, now);
                 if (i != posts.Count - 1)
                 {
                     strBuilder.AppendLine(timelinePost);
@@ -42,6 +52,16 @@ namespace Integral
                 }
             }
             return strBuilder.ToString();
+        }
+
+        private string GetPostTimestamp(DateTime postTime, DateTime now)
+        {
+            var timestamp = TimeResolver.GetFormatedTimeSinceStart(postTime, now);
+            if(timestamp == string.Empty)
+            {
+                return string.Empty;
+            }
+            return " (" + timestamp + ")";
         }
     }
 }
