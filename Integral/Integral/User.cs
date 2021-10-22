@@ -44,7 +44,7 @@ namespace Integral
 
         public string GetWall(DateTime now = default)
         {
-            return "Charlie - " + GetPosts(now, true, true);
+            return GetPosts(now, true, true);
         }
 
         private string GetPosts(DateTime now, bool includeFollowers, bool includeName)
@@ -71,6 +71,11 @@ namespace Integral
 
                 var username = user.Name;
                 var timelinePost = message + GetPostTimestamp(time, now);
+                if (includeName)
+                {
+                    timelinePost = username + " - " + timelinePost;
+                }
+                
                 if (i != allPosts.Count - 1)
                 {
                     strBuilder.AppendLine(timelinePost);
