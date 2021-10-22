@@ -23,9 +23,9 @@ namespace Integral.Test
         public Tests()
         {
             now = DateTime.UtcNow;
-            alice = new User();
-            bob = new User();
-            charlie = new User();
+            alice = new User { Name = "Alice" };
+            bob = new User { Name = "Bob" };
+            charlie = new User { Name = "Charlie" };
 
             bobPost1Time = now.Subtract(TimeSpan.FromMinutes(2));
             bobPost2Time = now.Subtract(TimeSpan.FromMinutes(1));
@@ -44,7 +44,7 @@ namespace Integral.Test
         [Fact]
         public void Timeline()
         {
-            var bobTimeline = bobTimelinePost1 + Environment.NewLine + bobTimelinePost2;
+            var bobTimeline = bobTimelinePost2 + Environment.NewLine + bobTimelinePost1;
 
             bob.Publish(bobPost1, bobPost1Time);
             bob.Publish(bobPost2, bobPost2Time);
@@ -55,10 +55,10 @@ namespace Integral.Test
         [Fact]
         public void Following()
         {
-            var charlieTimeline = 
+            var charlieTimeline =
                 "Charlie - " + charlieTimelinePost + Environment.NewLine +
-                "Bob - " + bobTimelinePost2 + Environment.NewLine + 
-                "Bob - " + bobTimelinePost1 + Environment.NewLine + 
+                "Bob - " + bobTimelinePost2 + Environment.NewLine +
+                "Bob - " + bobTimelinePost1 + Environment.NewLine +
                 "Alice - " + aliceTimelinePost2;
 
             alice.Publish(alicePostText, alicePostTime);
